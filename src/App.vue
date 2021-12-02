@@ -1,19 +1,18 @@
 <template>
-<div>
-  <v-container>
-  <header class="header">
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    
-  </div>
-  </header>
-  </v-container>
-  <v-content>
-  <router-view/>
-  </v-content>
+  <div>
+    <v-container>
+      <header>
+        <div id="app">
+          <div id="nav">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/about">About</router-link>
+          </div>
+        </div>
+      </header>
+    </v-container>
+    <v-content>
+      <router-view />
+    </v-content>
   </div>
 </template>
 
@@ -39,12 +38,10 @@
   color: #42b983;
 }
 
- .header {
+header {
   left: 0;
   top: 0;
   width: 100%;
-  background-color:lightblue;
-  margin: 0px;
-  padding: 0px;
- }
+  background-color: lightblue;
+}
 </style>
