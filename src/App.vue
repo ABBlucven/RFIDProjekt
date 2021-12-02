@@ -1,10 +1,19 @@
 <template>
+<div>
+  <v-container>
+  <header class="header">
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    
+  </div>
+  </header>
+  </v-container>
+  <v-content>
+  <router-view/>
+  </v-content>
   </div>
 </template>
 
@@ -29,4 +38,12 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+ .header {
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color:lightblue;
+ }
 </style>
