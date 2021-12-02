@@ -44,4 +44,8 @@ header {
   width: 100%;
   background-color: lightblue;
 }
+
+body {
+  margin: 0%;
+}
 </style>
