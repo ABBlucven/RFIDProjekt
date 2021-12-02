@@ -29,7 +29,7 @@
 #include <MFRC522.h>
 
 /* 1. Define the WiFi credentials */
-#define WIFI_SSID "ABB_Indgym_Guest"
+#define WIFI_SSID "ABB_Gym_IOT"
 #define WIFI_PASSWORD "Welcome2abb"
 
 /* 2. If work with RTDB, define the RTDB URL and database secret */
@@ -38,9 +38,11 @@
 
 
 /*rfid */
-#define RST_PIN         2          // Configurable, see typical pin layout above D4
-#define SS_PIN          15         // Configurable, see typical pin layout above
-
+#define RST_PIN         2          //D4
+#define SS_PIN          15         //(CS) D8 (sda)
+#define D5 14 // SPI Bus SCK (clock) (Clk)
+#define D6 12 // SPI Bus MISO 
+#define D7 13 // SPI Bus MOSI
  
 MFRC522 rfid(SS_PIN, RST_PIN); // Instance of the class
 
@@ -48,6 +50,9 @@ MFRC522::MIFARE_Key key;
 
 // Init array that will store new NUID 
 String UID = "";
+String path = "";
+String name = "";
+String Confirm = "";
 
 /* 3. Define the Firebase Data object */
 FirebaseData fbdo;
@@ -65,6 +70,12 @@ void setup()
 {
 
     Serial.begin(115200);
+    SPI.begin(); // Init SPI bus
+    rfid.PCD_Init(); // Init MFRC522 
+
+    for (byte i = 0; i < 6; i++) {
+      key.keyByte[i] = 0xFF;
+    }
 
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.print("Connecting to Wi-Fi");
@@ -99,7 +110,11 @@ void setup()
 
 void loop()
 {
-    // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
+  UID = "";
+  
+  
+  
+  // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
 
@@ -129,11 +144,37 @@ void loop()
 
   // Stop encryption on PCD
   rfid.PCD_StopCrypto1();
+  
+  path = "/students/190S/" + UID ;
+
+  Serial.print("Name: ");
+  while (Serial.available() == 0)
+  {}
+  name = Serial.readString();
+
+    // say what you got:
+  Serial.println(name);
+
+  Serial.println("Confirm? Y/N");
+  while (Serial.available() == 0)
+  {}
+  Confirm = Serial.readString();
+  if (Confirm != "Y" and Confirm != "y")
+  {
+    Serial.println("Scan card");  
+    return;
+  }
 
   if (millis() - dataMillis > 5000)
     {
         dataMillis = millis();
-        Serial.printf("Set int... %s\n", Firebase.setInt(fbdo, "/test/int", count++) ? "ok" : fbdo.errorReason().c_str());
+        //Serial.printf("Set rfid... %s\n", Firebase.setString(fbdo, path + "/class", "190S")  ? "ok" : fbdo.errorReason().c_str());
+        Serial.printf("Set timestamp... %s\n", Firebase.setTimestamp(fbdo, path + "/timestamp") ? "ok" : fbdo.errorReason().c_str()); //new Date(timestamp) javascript
+        Serial.printf("Set rfid... %s\n", Firebase.setString(fbdo, path + "/name", name)  ? "ok" : fbdo.errorReason().c_str());
+        Serial.printf("Get timestamp... %s\n", Firebase.getDouble(fbdo, path + "/timestamp") ? "ok" : fbdo.errorReason().c_str());
+        Serial.printf("TIMESTAMP: %lld\n", fbdo.to<uint64_t>());
     }
+  
+  Serial.println("Scan card");  
 
 }
