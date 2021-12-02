@@ -40,10 +40,11 @@
 }
 
  .header {
-  /* position: fixed; */
   left: 0;
   top: 0;
   width: 100%;
   background-color:lightblue;
+  margin: 0px;
+  padding: 0px;
  }
 </style>
