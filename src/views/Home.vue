@@ -8,7 +8,7 @@
         :key="elev"
       >
         <p class="name">{{elev}}</p>
-        <p>9:32</p>
+        <p>{{currentTime()}}</p>
       </div>
     </div>
   </div>
@@ -25,8 +25,16 @@ export default {
   },
   data () {
     return {
-      elever: ['Linus', 'Jonathan', 'Lucas', 'Arta']
+      elever: ['Linus', 'Jonathan', 'Lucas', 'Arta', 'Edvin']
     }
+  },
+  methods: {
+  currentTime() {
+    const current = new Date();
+    const time = current.getHours() + ":" + current.getMinutes();
+    const Time = time;
+    return Time
+  },
   }
 }
 </script>

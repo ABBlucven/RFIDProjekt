@@ -4,8 +4,8 @@
       <header>
         <div id="app">
           <div id="nav">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>
+            <router-link to="/" class="knapp">Närvaro</router-link> |
+            <router-link to="/login" class="knapp">Login</router-link>
           </div>
         </div>
       </header>
@@ -22,7 +22,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
 #nav {
@@ -31,21 +31,28 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color:black;
 }
 
 header {
   left: 0;
   top: 0;
   width: 100%;
-  background-color: lightblue;
+  background-color: #85b3d1ff;
 }
 
 body {
   margin: 0%;
+}
+
+.knapp {
+  background-color : #b3c7d6ff;
+  padding : 10px;
+  border-radius: 25px;
+
 }
 </style>
