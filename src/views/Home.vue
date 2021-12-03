@@ -4,11 +4,11 @@
     <div class="container">
       <div
         class="studentCard"
-        v-for="elev in elever"
+        v-for="elev in documents"
         :key="elev"
       >
-        <p class="name">{{elev}}</p>
-        <p>{{currentTime()}}</p>
+        <p class="name">{{elev["name"]}}</p>
+        <p>{{getTime(elev["timestamp"])}}</p>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import { db } from '../db'
 export default {
   name: 'Home',
   components: {
@@ -25,15 +25,22 @@ export default {
   },
   data () {
     return {
-      elever: ['Linus', 'Jonathan', 'Lucas', 'Arta', 'Edvin']
+      elever: ['Linus', 'Jonathan', 'Lucas', 'Arta', 'Edvin'],
+      documents: [],
+
     }
   },
+   created: function() {
+
+   },
+   firebase: {
+    documents: db.ref('students/190S'),
+  },
   methods: {
-  currentTime() {
-    const current = new Date();
-    const time = current.getHours() + ":" + current.getMinutes();
-    const Time = time;
-    return Time
+  getTime(timestamp) {
+    const Time = new Date(timestamp)
+    const time = Time.getHours() + ":" + Time.getMinutes();
+    return time
   },
   }
 }
