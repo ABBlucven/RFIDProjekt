@@ -15,7 +15,7 @@
             class="card login"
             v-bind:class="{ error: emptyFields }"
           >
-            <h1>Sign In</h1>
+            <h1>Logga in</h1>
             <form class="form-group">
               <input
                 v-model="emailLogin"
@@ -28,14 +28,14 @@
                 v-model="passwordLogin"
                 type="password"
                 class="form-control"
-                placeholder="Password"
+                placeholder="Lösenord"
                 required
               >
               <button
                 type="submit"
                 class="btn"
                 @click="doLogin"
-              >Log in</button>
+              >Logga in</button>
 
               <!-- <p>Don't have an account? <a
                   href="#"
@@ -44,6 +44,11 @@
               </p>
               <p><a href="#">Forgot your password?</a></p> -->
             </form>
+
+            <router-link
+              class="button"
+              to="/teacherPage"
+            >Närvaro</router-link>
           </div>
 
           <!-- <div
