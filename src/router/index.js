@@ -23,7 +23,18 @@ const routes = [
     path: '/teacherPage',
     name: 'teacherPage',
     component: () => import(/* webpackChunkName: "about" */ '../views/teacherPage.vue')
-  }
+  },
+  {
+    path: '/:classID',
+    name: 'Home',
+    props: true,
+    component: () => import(/* webpackChunkName: "about" */ '../views/attendancePage.vue')
+  },
+  // {
+  //   path: '/teacherPage/$name',
+  //   name: 'teacherPage',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/teacherPage.vue')
+  // }
 ]
 
 const router = new VueRouter({

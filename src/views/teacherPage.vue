@@ -1,13 +1,22 @@
 <template>
   <div class="container">
+
+    <!-- <ul>
+      <li
+        v-for="(value, key) in documents[0]"
+        :key="value"
+      >{{ key }}</li>
+    </ul> -->
+
+    <!-- {{Object.keys( documents ) }} -->
     <router-link
       class="classCard"
-      v-for="Class in classes"
-      :key="Class"
-      :to="`/${Class}`"
+      v-for="(value, key) in documents[0]"
+      :key="value+key"
+      :to="`/${key}`"
     >
       <p>
-        {{ Class }}
+        {{ key }}
       </p>
     </router-link>
   </div>
@@ -20,12 +29,17 @@ export default {
 
   data () {
     return {
-      classes: ['190S', '1901', '1902', '1903', '200S', '2001', '2002', '2003', '210S', '2101', '2102', '2103']
+      documents: [],
     }
   },
+
   firebase: {
     documents: db.ref('students'),
   },
+
+  created: {
+
+  }
 }
 </script>
 
