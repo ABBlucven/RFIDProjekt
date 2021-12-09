@@ -43,12 +43,12 @@
             <p class="bodyText">Ej närvarande</p>
           </div>
         </div>
-        class="studentCard"
+        <!-- class="studentCard"
         v-for="elev in documents"
         :key="elev"
         >
         <p class="name">{{elev["name"]}}</p>
-        <p>{{getTime(elev["timestamp"])}}</p>
+        <p>{{getTime(elev["timestamp"])}}</p> -->
       </div>
 
     </div>
