@@ -18,14 +18,14 @@
             <h1>Sign In</h1>
             <form class="form-group">
               <input
-                v-model="emailLogin"
+                v-model="email"
                 type="email"
                 class="form-control"
                 placeholder="Email"
                 required
               >
               <input
-                v-model="passwordLogin"
+                v-model="password"
                 type="password"
                 class="form-control"
                 placeholder="Password"
@@ -34,8 +34,8 @@
               <button
                 type="submit"
                 class="btn"
-                @click="doLogin"
-              >Log in</button>
+                @click="login"
+              >Logga in</button>
 
               <!-- <p>Don't have an account? <a
                   href="#"
@@ -93,37 +93,42 @@
 </template>
 
 <script>
+import firebase from '../db'
 
 export default {
 
   data () {
     return {
-      registerActive: false,
-      emailLogin: "",
-      passwordLogin: "",
-      emailReg: "",
-      passwordReg: "",
-      confirmReg: "",
+      // registerActive: false,
+      email: "",
+      password: "",
+      // emailReg: "",
+      // passwordReg: "",
+      // confirmReg: "",
       emptyFields: false
     }
   },
 
   methods: {
-    doLogin () {
-      if (this.emailLogin === "" || this.passwordLogin === "") {
-        this.emptyFields = true
-      } else {
-        alert("You are now logged in")
-      }
+    login () {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+        function (user) {
+          alert('Du är nu inloggad!')
+          alert(user)
+        },
+        function (err) {
+          alert('Fel!', err.message)
+        }
+      )
     },
 
-    doRegister () {
-      if (this.emailReg === "" || this.passwordReg === "" || this.confirmReg === "") {
-        this.emptyFields = true
-      } else {
-        alert("You are now registered")
-      }
-    }
+    // doRegister () {
+    //   if (this.emailReg === "" || this.passwordReg === "" || this.confirmReg === "") {
+    //     this.emptyFields = true
+    //   } else {
+    //     alert("You are now registered")
+    //   }
+    // }
   }
 }
 </script>

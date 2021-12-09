@@ -2,16 +2,19 @@
   <div>
     <v-container>
       <header>
-        <p class="title">Närvarokollen</p>
+        <router-link
+          class="title"
+          to="/"
+        >Närvarokollen</router-link>
         <div id="nav">
           <router-link
             class="button"
-            to="/"
+            to="/teacherPage"
           >Närvaro</router-link>
           <router-link
             class="button"
             to="/login"
-          >Login</router-link>
+          >Logga in</router-link>
         </div>
       </header>
     </v-container>
@@ -43,11 +46,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 30px;
+  padding: 20px 30px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: black;
+  user-select: none;
 }
 
 body {
@@ -66,6 +70,8 @@ body {
 .title {
   font-size: 30px;
   font-weight: bold;
+  text-decoration: none;
+  color: black;
 }
 
 .button {
