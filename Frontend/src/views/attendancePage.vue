@@ -13,7 +13,7 @@
           <div class="flip-card-front">
             <p class="header">
               {{ student["name"].split(" ")[0] }}
-              {{ student["name"].split(" ")[1].split("")[0] }}
+              {{getLastName(student["name"])}}
             </p>
             <p class="subheader2">Närvarande</p>
             <p class="bodyText">{{ getTime(student["timestamp"]) }}</p>
@@ -35,7 +35,7 @@
           <div class="flip-card-front">
             <p class="header">
               {{ student["name"].split(" ")[0] }}
-              {{ student["name"].split(" ")[1].split("")[0] }}
+              {{getLastName(student["name"])}}
             </p>
             <p class="subheader2">Försenad</p>
              <p class="bodyText">{{ getTime(student["timestamp"]) }}</p>
@@ -57,7 +57,7 @@
           <div class="flip-card-front" style="background-color: grey">
             <p class="header">
               {{ student["name"].split(" ")[0] }}
-              {{ student["name"].split(" ")[1].split("")[0] }}
+              {{getLastName(student["name"])}}
             </p>
             <p class="subheader2">Ej närvarande</p>
             <p class="subheader"></p>
@@ -173,6 +173,15 @@ export default {
   },
 
   methods: {
+    getLastName(name){
+      console.log(name)
+      var lastName = ''
+      for (let index = 1; index < name.split(" ").length; index++) {
+        const element = name.split(" ")[index];
+        lastName = lastName + element.split("")[0]
+      }
+      return lastName
+    },
     currentTime() {
       const current = new Date();
       const time = current.getHours() + ":" + current.getMinutes();
