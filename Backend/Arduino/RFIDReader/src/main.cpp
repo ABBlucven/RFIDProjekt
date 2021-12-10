@@ -145,7 +145,7 @@ void loop()
   // Stop encryption on PCD
   rfid.PCD_StopCrypto1();
   
-  path = "/students/classes/190S" + UID ;
+  path = "/students/classes/190S/" + UID ;
 
   // Serial.print("Name: ");
   // while (Serial.available() == 0)
@@ -172,7 +172,7 @@ void loop()
         
         // Serial.printf("Set rfid... %s\n", Firebase.setString(fbdo, path + "/name", name)  ? "ok" : fbdo.errorReason().c_str());
         Serial.printf("Set timestamp... %s\n", Firebase.setTimestamp(fbdo, path + "/timestamp") ? "ok" : fbdo.errorReason().c_str()); //new Date(timestamp) javascript
-        // Serial.printf("Get timestamp... %s\n", Firebase.getDouble(fbdo, path + "/timestamp") ? "ok" : fbdo.errorReason().c_str());
+        Serial.printf("Get timestamp... %s\n", Firebase.getDouble(fbdo, path + "/timestamp") ? "ok" : fbdo.errorReason().c_str());
         // Serial.printf("TIMESTAMP: %lld\n", fbdo.to<uint64_t>());
     }
   

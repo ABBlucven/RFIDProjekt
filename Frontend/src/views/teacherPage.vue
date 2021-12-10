@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <!-- <ul>
       <li
         v-for="(value, key) in documents[0]"
@@ -12,7 +11,7 @@
     <router-link
       class="classCard"
       v-for="(value, key) in documents[0]"
-      :key="value+key"
+      :key="value + key"
       :to="`/${key}`"
     >
       <p>
@@ -23,24 +22,21 @@
 </template>
 
 <script>
-import { db } from '../db'
+import { db } from "../db";
 
 export default {
-
-  data () {
+  data() {
     return {
       documents: [],
-    }
+    };
   },
 
   firebase: {
-    documents: db.ref('students'),
+    documents: db.ref("students"),
   },
 
-  created: {
-
-  }
-}
+  created: {},
+};
 </script>
 
 <style>

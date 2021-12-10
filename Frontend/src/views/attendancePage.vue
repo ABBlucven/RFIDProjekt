@@ -23,12 +23,12 @@
           class="flip-card-inner"
           v-else-if="onTime(student['timestamp']) === 'late'"
         >
-          <div class="flip-card-front" style="background-color: grey">
+          <div class="flip-card-front" >
             <p class="header">{{ student["name"].split(" ")[0] }} {{student["name"].split(" ")[1].split("")[0]}}</p>
             <p class="subheader2">Försenad</p>
             <p class="subheader"></p>
           </div>
-          <div class="flip-card-back" style="background-color: grey">
+          <div class="flip-card-back" >
             <p class="subheader1">{{ student["name"] }}</p>
             <p class="subheader2">{{ student.class }}</p>
             <p class="subheader2">{{ getDeltaTime(student["timestamp"]) }} försenad</p>
@@ -71,10 +71,12 @@ export default {
       currentIndex: 0,
       documents: [],
       calendar: [],
+      schedules: []
     };
   },
   firebase: {
-    documents: db.ref("students")
+    documents: db.ref("students"),
+    schedules: db.ref("schedules/190S")
   },
   props: {
     classID: String
@@ -89,9 +91,17 @@ export default {
       xmlHttp.open("GET", theUrl, true); // true for asynchronous
       xmlHttp.send(null);
     }
-
+    // const Time = new Date(schedules[0][this.classID]["endate"]);
+    // var now = new Date();
+    // now.setHours(0,0,0,0)
+    // if (Time > now) {
+      
+    // }
+    
+    console.log(this.schedules["link"])
     httpGetAsync(
       "https://cloud.timeedit.net/abbindustrigymnasium/web/public1/ri657Q6QZZ9Z53Q5Y36nQ657y.ics",
+      // this.schedules[this.classID]["link"],
       (data) => {
         var calendar = [];
         data = data.split(/\r?\n/);
@@ -177,13 +187,12 @@ export default {
       return time;
     },
     onTime(timestamp) {
+      var date = new Date(timestamp)
+      var lessonDate = new Date( Date.parse(this.calendar[this.currentIndex]["start"]))
       var val = ''
-      if (timestamp > Date.parse(this.calendar[this.currentIndex - 1]["end"])) {
-        console.log("_._")
-      }
       if (
         timestamp < Date.parse(this.calendar[this.currentIndex]["start"]) &&
-        timestamp > Date.parse(this.calendar[this.currentIndex - 1]["end"])
+        timestamp > Date.parse(this.calendar[this.currentIndex - 1]["end"]) && date.getDay() == lessonDate.getDate()
       ) {
         val = "onTime";
       }
