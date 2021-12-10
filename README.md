@@ -6,7 +6,7 @@ Vårt mål var att göra en RFID-scanner med uppkoppling till internet, med syft
 
 ## Tillvägagångssätt
 
-Projektet har delats upp i tre huvuddelar: konstruktion, backend och frontend. 
+Projektet delades upp i tre huvuddelar: konstruktion, backend och frontend. 
 
 ### Konstruktion
 
@@ -21,6 +21,4 @@ Backend består av en databas där samtliga registrerade elever lagras samt tidp
 Hemsidan är byggd med hjälp av JavaScript-ramverket Vue.
 
 ## Utvecklingsmöjligheter
-
-
 
