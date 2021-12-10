@@ -57,4 +57,4 @@ Programmet fungerar genom att **RFID-läsaren** uppdaterar timestamp i en [**Fir
 
 * Om en användare skannar sitt kort två gånger under samma lektion så ska den första räknas.
 
-
+---
