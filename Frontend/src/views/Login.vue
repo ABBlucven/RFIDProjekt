@@ -34,7 +34,7 @@
               <button
                 type="submit"
                 class="btn"
-                @click="login"
+                @click="register"
               >Logga in</button>
 
               <!-- <p>Don't have an account? <a
@@ -93,13 +93,17 @@
 </template>
 
 <script>
-import firebase from '../db'
+// import firebase from 'firebase/compat/app'
+// import firebase from '../db.js'
+// import { signInWithEmailAndPassword } from 'firebase/auth'
 
+// import { auth } from "@/db"
+// import { auth } from 'firebase/app'
 export default {
 
   data () {
     return {
-      // registerActive: false,
+      registerActive: false,
       email: "",
       password: "",
       // emailReg: "",
@@ -110,17 +114,33 @@ export default {
   },
 
   methods: {
-    login () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-        function (user) {
-          alert('Du är nu inloggad!')
-          alert(user)
-        },
-        function (err) {
-          alert('Fel!', err.message)
-        }
-      )
-    },
+    // login () {
+    //   console.log("hej")
+    //   // auth().signInWithEmailAndPassword("linus.olofsson@abbgymnasiet.se", "coolalinus123").then(
+    //   //   function (user) {
+    //   //     alert('Du är nu inloggad!')
+    //   //     alert(user)
+    //   //   },
+    //   //   function (err) {
+    //   //     alert('Fel!', err.message)
+    //   //   }
+    //   // )
+    //   // var auth = firebase.auth()
+
+    //   signInWithEmailAndPassword(auth, "linus.olofsson@abbgymnasiet.se", "coolalinus123")
+    //     .then(() => {
+    //       this.loading = false
+    //       console.log("logga in!")
+    //       // this.$router.replace("/homeuser");
+    //     })
+    //     .catch((err) => {
+    //       console.error(err)
+
+    //       this.loading = false
+    //       // this.showErrorSnackbar(err.message);
+    //     })
+
+    //},
 
     // doRegister () {
     //   if (this.emailReg === "" || this.passwordReg === "" || this.confirmReg === "") {
@@ -129,6 +149,21 @@ export default {
     //     alert("You are now registered")
     //   }
     // }
+
+    // register () {
+    //   firebase
+    //     .auth // get the auth api
+    //     .createUserWithEmailAndPassword('linus@abb.se', 'hejhej123') // need .value because ref()
+    //     .then(() => {
+    //       console.log('Successfully registered!')
+    //       // redirect to the feed
+    //     })
+    //     .catch(error => {
+    //       console.log(error.code)
+    //       alert(error.message)
+    //     })
+    // }
+
   }
 }
 </script>
@@ -155,10 +190,11 @@ p {
 }
 .card {
   padding: 20px;
-  margin: 100px auto;
+  margin: 50px auto;
   min-width: 400px;
   background-color: #b3c7d6ff;
-  border-radius: 50px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 20px grey;
 }
 
 .form-group input {

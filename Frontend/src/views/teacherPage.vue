@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db } from "../db"
 
 export default {
-  data() {
+  data () {
     return {
       documents: [],
-    };
+    }
   },
 
   firebase: {
@@ -48,6 +48,7 @@ export default {
   align-items: center;
   font-family: Arial, sans-serif;
 }
+
 .classCard {
   min-width: 200px;
   min-height: 100px;
@@ -60,5 +61,10 @@ export default {
   color: black;
   font-size: 50px;
   font-weight: bold;
+}
+
+.classCard:hover {
+  background-color: rgb(80, 191, 255);
+  transition: all 0.2s ease-in;
 }
 </style>
