@@ -1,13 +1,20 @@
 <template>
   <div class="home">
     <div class="container">
-      <div class="flip-card" v-for="student in documents[0][classID]" :key="student">
+      <div
+        class="flip-card"
+        v-for="student in documents[0][classID]"
+        :key="student"
+      >
         <div
           class="flip-card-inner"
           v-if="onTime(student['timestamp']) === 'onTime'"
         >
           <div class="flip-card-front">
-            <p class="header">{{ student["name"].split(" ")[0] }} {{student["name"].split(" ")[1].split("")[0]}}</p>
+            <p class="header">
+              {{ student["name"].split(" ")[0] }}
+              {{ student["name"].split(" ")[1].split("")[0] }}
+            </p>
             <p class="subheader2">Närvarande</p>
             <p class="bodyText">{{ getTime(student["timestamp"]) }}</p>
           </div>
@@ -15,7 +22,9 @@
           <div class="flip-card-back">
             <p class="subheader1">{{ student["name"] }}</p>
             <p class="subheader2">{{ student.class }}</p>
-            <p class="subheader2">{{ getDeltaTime(student["timestamp"]) }} tidig</p>
+            <p class="subheader2">
+              {{ getDeltaTime(student["timestamp"]) }} tidig
+            </p>
           </div>
         </div>
 
@@ -23,15 +32,21 @@
           class="flip-card-inner"
           v-else-if="onTime(student['timestamp']) === 'late'"
         >
-          <div class="flip-card-front" >
-            <p class="header">{{ student["name"].split(" ")[0] }} {{student["name"].split(" ")[1].split("")[0]}}</p>
+          <div class="flip-card-front">
+            <p class="header">
+              {{ student["name"].split(" ")[0] }}
+              {{ student["name"].split(" ")[1].split("")[0] }}
+            </p>
             <p class="subheader2">Försenad</p>
+             <p class="bodyText">{{ getTime(student["timestamp"]) }}</p>
             <p class="subheader"></p>
           </div>
-          <div class="flip-card-back" >
+          <div class="flip-card-back">
             <p class="subheader1">{{ student["name"] }}</p>
             <p class="subheader2">{{ student.class }}</p>
-            <p class="subheader2">{{ getDeltaTime(student["timestamp"]) }} försenad</p>
+            <p class="subheader2">
+              {{ getDeltaTime(student["timestamp"]) }} försenad
+            </p>
           </div>
         </div>
 
@@ -40,7 +55,10 @@
           v-else-if="onTime(student['timestamp']) === 'notPresent'"
         >
           <div class="flip-card-front" style="background-color: grey">
-            <p class="header">{{ student["name"].split(" ")[0] }} {{student["name"].split(" ")[1].split("")[0]}}</p>
+            <p class="header">
+              {{ student["name"].split(" ")[0] }}
+              {{ student["name"].split(" ")[1].split("")[0] }}
+            </p>
             <p class="subheader2">Ej närvarande</p>
             <p class="subheader"></p>
           </div>
@@ -52,8 +70,6 @@
         </div>
       </div>
     </div>
-
-   
   </div>
 </template>
 
@@ -71,15 +87,15 @@ export default {
       currentIndex: 0,
       documents: [],
       calendar: [],
-      schedules: []
+      schedules: [],
     };
   },
   firebase: {
     documents: db.ref("students"),
-    schedules: db.ref("schedules/190S")
+    schedules: db.ref("schedules/190S"),
   },
   props: {
-    classID: String
+    classID: String,
   },
   created() {
     function httpGetAsync(theUrl, callback) {
@@ -95,10 +111,10 @@ export default {
     // var now = new Date();
     // now.setHours(0,0,0,0)
     // if (Time > now) {
-      
+
     // }
-    
-    console.log(this.schedules["link"])
+
+    console.log(this.schedules["link"]);
     httpGetAsync(
       "https://cloud.timeedit.net/abbindustrigymnasium/web/public1/ri657Q6QZZ9Z53Q5Y36nQ657y.ics",
       // this.schedules[this.classID]["link"],
@@ -187,28 +203,29 @@ export default {
       return time;
     },
     onTime(timestamp) {
-      var date = new Date(timestamp)
-      var lessonDate = new Date( Date.parse(this.calendar[this.currentIndex]["start"]))
-      var val = ''
+      var date = new Date(timestamp);
+      var lessonDate = new Date(
+        Date.parse(this.calendar[this.currentIndex]["start"])
+      );
+      var val = "";
       if (
         timestamp < Date.parse(this.calendar[this.currentIndex]["start"]) &&
-        timestamp > Date.parse(this.calendar[this.currentIndex - 1]["end"]) && date.getDay() == lessonDate.getDate()
+        timestamp > Date.parse(this.calendar[this.currentIndex - 1]["end"]) &&
+        date.getDay() == lessonDate.getDay()
       ) {
         val = "onTime";
-      }
-      else if (
+      } else if (
         timestamp > Date.parse(this.calendar[this.currentIndex]["start"]) &&
         timestamp < Date.parse(this.calendar[this.currentIndex]["end"])
       ) {
         val = "late";
-      }
-      else if (
+      } else if (
         timestamp < Date.parse(this.calendar[this.currentIndex]["start"])
       ) {
-        val =  "notPresent";
+        val = "notPresent";
       }
-    
-      return val
+
+      return val;
     },
   },
 };
